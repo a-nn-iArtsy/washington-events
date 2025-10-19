@@ -1,0 +1,68 @@
+// Day 1 Test Script
+// Tests the basic setup and first scraper
+
+const EventbriteScraper = require('./src/scrapers/eventbrite_scraper');
+const heartbeatMonitor = require('./src/utils/heartbeat');
+
+async function testDay1Setup() {
+  console.log('🚀 Testing Day 1 Setup...\n');
+
+  // Test 1: Check if dependencies are installed
+  console.log('1. Checking dependencies...');
+  try {
+    require('express');
+    require('cheerio');
+    require('axios');
+    require('winston');
+    console.log('✅ All dependencies loaded successfully');
+  } catch (error) {
+    console.log('❌ Missing dependencies:', error.message);
+    return;
+  }
+
+  // Test 2: Test heartbeat system
+  console.log('\n2. Testing heartbeat system...');
+  try {
+    heartbeatMonitor.updateHeartbeat('generator', 1, 'test_scraping', 'running');
+    const status = heartbeatMonitor.getAgentStatus('generator', 1);
+    console.log('✅ Heartbeat system working:', status ? 'YES' : 'NO');
+  } catch (error) {
+    console.log('❌ Heartbeat system failed:', error.message);
+  }
+
+  // Test 3: Test base scraper
+  console.log('\n3. Testing base scraper...');
+  try {
+    const sourceConfig = {
+      id: 1,
+      name: 'Test Source',
+      url: 'https://example.com',
+      type: 'test'
+    };
+    
+    const scraper = new EventbriteScraper(sourceConfig);
+    console.log('✅ Base scraper instantiated successfully');
+  } catch (error) {
+    console.log('❌ Base scraper failed:', error.message);
+  }
+
+  // Test 4: Test database connection (if available)
+  console.log('\n4. Testing database connection...');
+  try {
+    const db = require('./src/database/connection');
+    console.log('✅ Database connection configured');
+  } catch (error) {
+    console.log('⚠️  Database connection not available (expected for Day 1)');
+  }
+
+  console.log('\n🎉 Day 1 setup test completed!');
+  console.log('\nNext steps:');
+  console.log('- Set up PostgreSQL database');
+  console.log('- Run database migrations');
+  console.log('- Test Eventbrite API scraper');
+  console.log('- Start building React frontend');
+}
+
+// Run the test
+testDay1Setup().catch(console.error);
+

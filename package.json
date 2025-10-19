@@ -1,0 +1,27 @@
+{
+  "name": "washington-events",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/api/server.js",
+    "dev": "node --watch src/api/server.js",
+    "test": "node test_day1.js",
+    "watchdog": "node scripts/watchdog.js",
+    "scrape": "node src/scrapers/run_scrapers.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "axios": "^1.12.2",
+    "cheerio": "^1.1.2",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "knex": "^3.1.0",
+    "pg": "^8.16.3",
+    "winston": "^3.18.3"
+  }
+}
