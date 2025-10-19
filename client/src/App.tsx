@@ -1,11 +1,23 @@
-import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+import { useState, useEffect } from 'react'
 import './App.css'
 
+interface Event {
+  id: number;
+  title: string;
+  description: string;
+  start_datetime: string;
+  location_name: string;
+  location_address: string;
+  category: string;
+  is_free: boolean;
+  price_min: number;
+  image_url: string;
+}
+
 function App() {
-  const [events, setEvents] = useState([])
+  const [events, setEvents] = useState<Event[]>([])
   const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
+  const [error, setError] = useState<string | null>(null)
   const [filters, setFilters] = useState({
     date: '',
     location: '',
@@ -68,7 +80,7 @@ function App() {
     }
   }
 
-  const handleFilterChange = (key, value) => {
+  const handleFilterChange = (key: string, value: string) => {
     setFilters(prev => ({
       ...prev,
       [key]: value
